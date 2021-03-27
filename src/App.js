@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import List from "./components/List";
+import Details from "./components/Details";
 
 function App() {
+  const [profile, setProfile] = useState({ id: null, name: "" });
+
+  const handleProfile = (id, name) => {
+    setProfile({ id, name });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="ui raised very text container">
+        <div className="ui grid">
+          <div className="eight wide column">
+            <List handleProfile={handleProfile} />
+          </div>
+          <div className="eight wide column">
+            {profile ? <Details info={profile} /> : null}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
